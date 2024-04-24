@@ -1,3 +1,6 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
 name: .NET
 
 on:
@@ -14,9 +17,9 @@ jobs:
       run:
         working-directory: ./ch10/UqsAppointmentBooking
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
