@@ -68,11 +68,14 @@ public class SlotsService : ISlotsService
             }
         }
         var employeeAppointments = await _appointmentRepository.GetAppointmentsByEmployeeIdAsync(employeeId);
+        //var appointments = employeeAppointments.Where(x =>
+        //    x.Ending < appointmentsMaxDay &&
+        //    ((x.Starting <= _now && x.Ending > _now) || x.Starting > _now)).ToArray();
         var appointments = employeeAppointments.Where(x =>
             x.Ending < appointmentsMaxDay &&
-            ((x.Starting <= _now && x.Ending > _now) || x.Starting > _now)).ToArray();
+            ((x.Starting <= _now && x.Ending > _now) && x.Starting > _now)).ToArray();
 
-        foreach(var appointment in appointments)
+        foreach (var appointment in appointments)
         {
             DateTime appointmentStartWithRest = appointment.Starting.AddMinutes(-_settings.RestInMin);
             DateTime appointmentEndWithRest = appointment.Ending.AddMinutes(_settings.RestInMin);
